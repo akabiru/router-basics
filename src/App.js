@@ -1,11 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import createHistory from 'history/createBrowserHistory';
 
-const history = createHistory();
+class Router extends React.Component {
+  static childContextTypes = {
+    history: PropTypes.object,
+    location: PropTypes.object,
+  }
 
-const Route = ({ path, component }) => {
-  const pathname = window.location.pathname;
+  constructor(props) {
+    super(props)
+
+    this.history = createHistory()
+    this.history.listen(() => this.forceUpdate())
+  }
+
+  getChildContext() {
+    return {
+      history: this.history,
+      location: window.location,
+    }
+  }
+
+  render() {
+    return this.props.children
+  }
+}
+
+const Route = ({ path, component }, { location }) => {
+  const pathname = location.pathname;
   if (pathname.match(path)) {
     return (
       React.createElement(component)
@@ -14,6 +38,10 @@ const Route = ({ path, component }) => {
     return null;
   }
 };
+
+Route.contextTypes = {
+  location: PropTypes.object,
+}
 
 const Link = ({ to, children }) => (
   <a
@@ -34,31 +62,33 @@ class App extends React.Component {
 
   render() {
     return (
-      <div
-        className='ui text container'
-      >
-        <h2 className='ui dividing header'>
-          Which body of water?
-        </h2>
+      <Router>
+        <div
+          className='ui text container'
+        >
+          <h2 className='ui dividing header'>
+            Which body of water?
+          </h2>
 
-        <ul>
-          <li>
-            <Link to='/atlantic'>
-              <code>/atlantic</code>
-            </Link>
-          </li>
-          <li>
-            <Link to='/pacific'>
-              <code>/pacific</code>
-            </Link>
-          </li>
-        </ul>
+          <ul>
+            <li>
+              <Link to='/atlantic'>
+                <code>/atlantic</code>
+              </Link>
+            </li>
+            <li>
+              <Link to='/pacific'>
+                <code>/pacific</code>
+              </Link>
+            </li>
+          </ul>
 
-        <hr />
+          <hr />
 
-        <Route path='/atlantic' component={Atlantic} />
-        <Route path='/pacific' component={Pacific} />
-      </div>
+          <Route path='/atlantic' component={Atlantic} />
+          <Route path='/pacific' component={Pacific} />
+        </div>
+      </Router>
     );
   }
 }
