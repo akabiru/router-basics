@@ -25,7 +25,8 @@ class App extends React.Component {
 
         <hr />
 
-        {/* We'll insert the Route components here */}
+        <Route path='/atlantic' component={Atlantic} />
+        <Route path='/pacific' component={Pacific} />
       </div>
     );
   }
