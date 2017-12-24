@@ -88,6 +88,15 @@ const App = () =>(
 
       <hr />
 
+      <Route
+        path='/atlantic/ocean'
+        render={() => (
+          <div>
+            <h3>Atlantic Ocean - Again!</h3>
+            <p>Also known as "The Pond."</p>
+          </div>
+        )}
+      />
       <Route path='/atlantic' component={Atlantic} />
       <Route path='/pacific' component={Pacific} />
       <Route path='/black-sea' component={BlackSea} />
