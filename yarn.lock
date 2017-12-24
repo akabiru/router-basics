@@ -2803,7 +2803,7 @@ fsevents@^1.0.0:
     nan "^2.3.0"
     node-pre-gyp "^0.6.39"
 
-"fsr-helpers@file:../../fsr-helpers":
+"fsr-helpers@file:../fsr-helpers":
   version "1.0.0"
   dependencies:
     react "15.5.4"

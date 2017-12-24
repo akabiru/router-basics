@@ -3,6 +3,24 @@ import PropTypes from 'prop-types';
 
 import createHistory from 'history/createBrowserHistory';
 
+class Redirect extends React.Component {
+  static contextTypes = {
+    history: PropTypes.object,
+  }
+
+  componentDidMount() {
+    const history = this.context.history
+    const to = this.props.to
+    // push location to history stack
+    // call history API to modify app location
+    history.push(to);
+  }
+
+  render() {
+    return null
+   }
+}
+
 class Router extends React.Component {
   static childContextTypes = {
     history: PropTypes.object,
@@ -43,7 +61,7 @@ Route.contextTypes = {
   location: PropTypes.object,
 }
 
-const Link = ({ to, children }) => (
+const Link = ({ to, children }, { history }) => (
   <a
     onClick={(e) => {
       e.preventDefault();
@@ -55,43 +73,39 @@ const Link = ({ to, children }) => (
   </a>
 );
 
-class App extends React.Component {
-  componentDidMount() {
-    history.listen(() => this.forceUpdate());
-  }
-
-  render() {
-    return (
-      <Router>
-        <div
-          className='ui text container'
-        >
-          <h2 className='ui dividing header'>
-            Which body of water?
-          </h2>
-
-          <ul>
-            <li>
-              <Link to='/atlantic'>
-                <code>/atlantic</code>
-              </Link>
-            </li>
-            <li>
-              <Link to='/pacific'>
-                <code>/pacific</code>
-              </Link>
-            </li>
-          </ul>
-
-          <hr />
-
-          <Route path='/atlantic' component={Atlantic} />
-          <Route path='/pacific' component={Pacific} />
-        </div>
-      </Router>
-    );
-  }
+Link.contextTypes = {
+  history: PropTypes.object,
 }
+
+const App = () =>(
+  <Router>
+    <div
+      className='ui text container'
+    >
+      <h2 className='ui dividing header'>
+        Which body of water?
+        </h2>
+
+      <ul>
+        <li>
+          <Link to='/atlantic'>
+            <code>/atlantic</code>
+          </Link>
+        </li>
+        <li>
+          <Link to='/pacific'>
+            <code>/pacific</code>
+          </Link>
+        </li>
+      </ul>
+
+      <hr />
+
+      <Route path='/atlantic' component={Atlantic} />
+      <Route path='/pacific' component={Pacific} />
+    </div>
+  </Router>
+)
 
 const Atlantic = () => (
   <div>

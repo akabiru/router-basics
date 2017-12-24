@@ -5,7 +5,7 @@
   "devDependencies": {
     "concurrently": "3.4.0",
     "react-scripts": "0.9.5",
-    "fsr-helpers": "file:../../fsr-helpers"
+    "fsr-helpers": "file:../fsr-helpers"
   },
   "dependencies": {
     "history": "4.3.0",
