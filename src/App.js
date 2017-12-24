@@ -77,6 +77,26 @@ Link.contextTypes = {
   history: PropTypes.object,
 }
 
+const Atlantic = () => (
+  <div>
+    <h3>Atlantic Ocean</h3>
+    <p>
+      The Atlantic Ocean covers approximately 1/5th of the
+      surface of the earth.
+    </p>
+  </div>
+);
+
+const Pacific = () => (
+  <div>
+    <h3>Pacific Ocean</h3>
+    <p>
+      Ferdinand Magellan, a Portuguese explorer, named the ocean
+      'mar pacifico' in 1521, which means peaceful sea.
+    </p>
+  </div>
+);
+
 const App = () =>(
   <Router>
     <div
@@ -97,34 +117,20 @@ const App = () =>(
             <code>/pacific</code>
           </Link>
         </li>
+        <li>
+          <Link to='/black-sea'>
+            <code>/black-sea</code>
+          </Link>
+        </li>
       </ul>
 
       <hr />
 
       <Route path='/atlantic' component={Atlantic} />
       <Route path='/pacific' component={Pacific} />
+      <Route path='/black-sea' component={BlackSea} />
     </div>
   </Router>
 )
-
-const Atlantic = () => (
-  <div>
-    <h3>Atlantic Ocean</h3>
-    <p>
-      The Atlantic Ocean covers approximately 1/5th of the
-      surface of the earth.
-    </p>
-  </div>
-);
-
-const Pacific = () => (
-  <div>
-    <h3>Pacific Ocean</h3>
-    <p>
-      Ferdinand Magellan, a Portuguese explorer, named the ocean
-      'mar pacifico' in 1521, which means peaceful sea.
-    </p>
-  </div>
-);
 
 export default App;
