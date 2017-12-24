@@ -89,6 +89,16 @@ const App = () =>(
       <hr />
 
       <Route
+        exact path='/'
+        render={() => (
+          <div>
+            <h3>
+              Welcome! Select a body of saline water above.
+            </h3>
+          </div>
+        )}
+      />
+      <Route
         path='/atlantic/ocean'
         render={() => (
           <div>
